@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "622729423644",
+    "firebase_url": "https://weddingpi-3fa5f.firebaseio.com",
+    "project_id": "weddingpi-3fa5f",
+    "storage_bucket": "weddingpi-3fa5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622729423644:android:c84d8b75a0af4960db68d9",
+        "android_client_info": {
+          "package_name": "com.makayasa.kekkon_revision"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622729423644-aerdpn6v2epdufogvgrs53d9di5dmqfu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.makayasa.kekkon_revision",
+            "certificate_hash": "2b934212fcd987a5ef2ccbc5d5c1d010dd418e25"
+          }
+        },
+        {
+          "client_id": "622729423644-97e81m22ctta4c28nlkl7e25ub1b8fee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPgOFqRODBKVHWQ1Nxq0UGUryqBpnGid8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622729423644-97e81m22ctta4c28nlkl7e25ub1b8fee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
