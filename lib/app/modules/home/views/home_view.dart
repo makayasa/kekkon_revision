@@ -39,23 +39,58 @@ class HomeView extends GetView<HomeController> {
         child: Column(
           children: [
             Container(
-              child: Image.asset('assets/images/wedding_1.jpg'),
+              child: ClipRRect(
+                borderRadius: kDefaultBorderRadius,
+                child: Image.asset(
+                  'assets/images/wedding_1.jpg',
+                ),
+              ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 45),
             Divider(thickness: 2.5),
-            SizedBox(height: 20),
+            SizedBox(height: 45),
             Expanded(
               child: Container(
+                margin: EdgeInsets.only(
+                  bottom: 45,
+                ),
                 child: StaggeredGridView.countBuilder(
+                  physics: NeverScrollableScrollPhysics(),
                   crossAxisCount: 3,
                   crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  itemCount: 6,
+                  mainAxisSpacing: 40,
+                  itemCount: controller.homeContent.length,
+                  shrinkWrap: true,
                   staggeredTileBuilder: (index) {
                     return StaggeredTile.fit(1);
                   },
                   itemBuilder: (context, index) {
-                    return Container();
+                    return InkWell(
+                      onTap: () {
+                        // logKey('home content', controller.homeContent[index]['text']);
+                        controller.routesContent(index: index);
+                      },
+                      splashColor: kPrimaryColor.withOpacity(0.45),
+                      child: Container(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 80,
+                              child: Image.asset(
+                                controller.homeContent[index]['image']!,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            DefText(
+                              controller.homeContent[index]['text']!,
+                              textAlign: TextAlign.center,
+                              fontWeight: FontWeight.bold,
+                            ).normal,
+                          ],
+                        ),
+                      ),
+                    );
                   },
                 ),
               ),
