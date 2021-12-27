@@ -1,27 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:kekkon_revision/app/components/default_text.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 
 class PakaianWanitaController extends GetxController {
   var tittle = 'Pakaian Wanita'.obs;
-  var temp = {};
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  var listData = [].obs;
+  // Future<QuerySnapshot<Object?>> fetchData() async {
+  //   CollectionReference gaun = firestore.collection('gaun');
 
-  Future<QuerySnapshot<Object?>> fetchData() async {
-    CollectionReference gaun = firestore.collection('gaun');
-
-    return gaun.get();
-  }
-
-  void add() async {
-    CollectionReference cart = firestore.collection('cartt');
-
-    cart.add({'nama': 'yasa'});
-  }
+  //   return gaun.get();
+  // }
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    var temp = await fetchData(
+      collection: 'gaun',
+    );
+    listData.assignAll(temp!);
+    if (listData.isEmpty) {
+      Get.defaultDialog(
+        content: DefText('error').normal,
+      );
+    }
   }
 
   @override

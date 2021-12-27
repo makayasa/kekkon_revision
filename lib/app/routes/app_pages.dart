@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:kekkon_revision/app/modules/cart/bindings/cart_binding.dart';
 import 'package:kekkon_revision/app/modules/cart/views/cart_view.dart';
+import 'package:kekkon_revision/app/modules/detail_item/bindings/detail_item_binding.dart';
+import 'package:kekkon_revision/app/modules/detail_item/views/detail_item_view.dart';
 import 'package:kekkon_revision/app/modules/dokumentasi/bindings/dokumentasi_binding.dart';
 import 'package:kekkon_revision/app/modules/dokumentasi/views/dokumentasi_view.dart';
 import 'package:kekkon_revision/app/modules/entertainment/bindings/entertainment_binding.dart';
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.CART,
       page: () => CartView(),
       binding: CartBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_ITEM,
+      page: () => DetailItemView(),
+      binding: DetailItemBinding(),
     ),
   ];
 }
