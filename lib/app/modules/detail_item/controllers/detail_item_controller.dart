@@ -11,6 +11,7 @@ class DetailItemController extends GetxController {
   void onInit() {
     super.onInit();
     if (Get.arguments != null) {
+      logKey('arguments', Get.arguments);
       data.assignAll(Get.arguments['data']);
       logKey('data', data);
       images.assignAll(data['images']);

@@ -5,27 +5,30 @@ import 'package:kekkon_revision/app/components/default_appbar.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/components/gridview_content.dart';
 
-import '../controllers/pakaian_pria_controller.dart';
+import '../controllers/list_items_controller.dart';
 
-class PakaianPriaView extends GetView<PakaianPriaController> {
+class ListItemsView extends GetView<ListItemsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: DefAppBar(tittle: controller.tittle.value),
+      appBar: DefAppBar(
+        tittle: controller.title.value,
+      ),
       backgroundColor: Colors.white,
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 15),
-        child: GetX<PakaianPriaController>(
-          init: PakaianPriaController(),
+        child: GetX<ListItemsController>(
+          init: ListItemsController(),
           builder: (ctrl) {
             return Container(
-              child: ctrl.listData.isEmpty
+              child: ctrl.listItems.isEmpty
                   ? Center(
+                      // child: CircularProgressIndicator(),
                       child: loading(),
                     )
                   : GridviewContent(
-                      data: ctrl.listData,
-                      tittle: ctrl.tittle.value,
+                      data: ctrl.listItems,
+                      tittle: ctrl.title.value,
                     ),
             );
           },

@@ -4,52 +4,48 @@ import 'package:kekkon_revision/app/routes/app_pages.dart';
 class HomeController extends GetxController {
   var homeContent = [
     {
-      'image': 'assets/icons/wedding-dress.png',
+      'icon': 'assets/icons/wedding-dress.png',
       'text': 'Pakaian Wanita',
+      'collection': 'gaun',
+      'title': 'Pakaian Wanita',
     },
     {
-      'image': 'assets/icons/wedding-arch.png',
+      'icon': 'assets/icons/wedding-arch.png',
       'text': 'Venue & Decoration',
+      'collection': 'venue',
+      'title': 'Venue & Decoration',
     },
     {
-      'image': 'assets/icons/tuxedo.png',
+      'icon': 'assets/icons/tuxedo.png',
       'text': 'Pakaian Pria',
+      'collection': 'jas',
+      'title': 'Pakaian Pria',
     },
     {
-      'image': 'assets/icons/wedding-invitation-1.png',
+      'icon': 'assets/icons/wedding-invitation-1.png',
       'text': 'Undangan',
+      'collection': 'undangan',
+      'title': 'Undangan',
     },
     {
-      'image': 'assets/icons/music.png',
+      'icon': 'assets/icons/music.png',
       'text': 'Musik & Entertainment',
+      'collection': 'musik',
+      'title': 'Entertainment',
     },
     {
-      'image': 'assets/icons/photo-camera.png',
+      'icon': 'assets/icons/photo-camera.png',
       'text': 'Dokumentasi',
+      'collection': 'dokumentasi',
+      'title': 'Dokumentasi',
     },
   ].obs;
 
-  void routesContent({
-    required int index,
-  }) {
-    if (index == 0) {
-      Get.toNamed(Routes.PAKAIAN_WANITA);
-    }
-    if (index == 1) {
-      Get.toNamed(Routes.VENUE);
-    }
-    if (index == 2) {
-      Get.toNamed(Routes.PAKAIAN_PRIA);
-    }
-    if (index == 3) {
-      Get.toNamed(Routes.UNDANGAN);
-    }
-    if (index == 4) {
-      Get.toNamed(Routes.ENTERTAINMENT);
-    }
-    if (index == 5) {
-      Get.toNamed(Routes.DOKUMENTASI);
-    }
+  void routesContent({required int index}) {
+    Get.toNamed(
+      Routes.LIST_ITEMS,
+      arguments: homeContent[index],
+    );
   }
 
   @override

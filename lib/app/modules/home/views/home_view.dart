@@ -78,7 +78,7 @@ class HomeView extends GetView<HomeController> {
                               width: 80,
                               height: 80,
                               child: Image.asset(
-                                controller.homeContent[index]['image']!,
+                                controller.homeContent[index]['icon']!,
                               ),
                             ),
                             SizedBox(height: 5),
