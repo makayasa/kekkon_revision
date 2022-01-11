@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kekkon_revision/app/routes/app_pages.dart';
 
@@ -40,6 +41,8 @@ class HomeController extends GetxController {
       'title': 'Dokumentasi',
     },
   ].obs;
+
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   void routesContent({required int index}) {
     Get.toNamed(
