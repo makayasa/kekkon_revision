@@ -109,4 +109,15 @@ class DefText {
       overflow: maxLine != null ? TextOverflow.ellipsis : null,
     );
   }
+
+  Text get huge {
+    return Text(
+      text,
+      key: key,
+      maxLines: maxLine,
+      textAlign: textAlign,
+      style: _defaultValue.copyWith(fontSize: 30.7),
+      overflow: maxLine != null ? TextOverflow.ellipsis : null,
+    );
+  }
 }

@@ -78,6 +78,13 @@ Widget loading({double? size}) {
   );
 }
 
+dialogLoading() {
+  Get.dialog(
+    loading(),
+    barrierDismissible: false,
+  );
+}
+
 String dateFormater(
   dynamic date, {
   String dateFormat = "EEEE, dd MMMM - HH:mm",
