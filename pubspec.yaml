@@ -20,6 +20,7 @@ dependencies:
   form_builder_validators: ^7.3.0
   get: 4.3.8
   get_storage: ^2.0.3
+  google_sign_in: ^5.2.3
   intl: ^0.17.0
 
 dev_dependencies:

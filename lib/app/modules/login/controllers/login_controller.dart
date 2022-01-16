@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
-import 'package:kekkon_revision/app/components/error_dialog.dart';
+import 'package:kekkon_revision/app/components/default_dialog.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/controllers/auth_controller.dart';
 import 'package:kekkon_revision/app/routes/app_pages.dart';
@@ -32,7 +32,7 @@ class LoginController extends GetxController {
         Get.back();
         logKey('exception login', e);
         Get.dialog(
-          ErrorDialog(
+          DefDialog(
             onConfirm: () {
               Get.back();
             },

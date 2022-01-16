@@ -1,14 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
+import 'package:kekkon_revision/app/components/constant.dart';
 import 'package:kekkon_revision/app/components/default_appbar.dart';
+import 'package:kekkon_revision/app/components/default_text.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/components/primary_button.dart';
 import 'package:kekkon_revision/app/modules/detail_item/components/carousel.dart';
-import 'package:kekkon_revision/app/components/constant.dart';
-import 'package:kekkon_revision/app/components/default_text.dart';
 import 'package:kekkon_revision/app/modules/detail_item/components/header_image.dart';
 
 import '../controllers/detail_item_controller.dart';
@@ -18,7 +15,7 @@ class DetailItemView extends GetView<DetailItemController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: DefAppBar(
-        tittle: controller.tittle.value,
+        tittle: controller.title.value,
       ),
       body: Container(
         child: Stack(
@@ -104,7 +101,8 @@ class DetailItemView extends GetView<DetailItemController> {
               child: PrimaryButton(
                 text: 'Add To Cart',
                 press: () {
-                  logKey('add to cart', controller.data);
+                  // logKey('add to cart', controller.data);
+                  controller.addToCart();
                 },
               ),
             )

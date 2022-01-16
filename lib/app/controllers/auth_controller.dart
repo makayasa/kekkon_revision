@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
@@ -11,6 +12,8 @@ class AuthController extends GetxController {
   var photoUrl = ''.obs;
   var idToken = ''.obs;
 
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   @override
   void onInit() async {
     super.onInit();
@@ -21,6 +24,13 @@ class AuthController extends GetxController {
       (event) async {
         dialogLoading();
         if (event != null) {
+          // CollectionReference cart = firestore.collection('cart');
+          // cart.add(
+          //   {
+          //     'initial': DateTime.now(),
+          //   },
+          // );
+
           uid.value = event.uid;
           email.value = event.email ?? '';
           photoUrl.value = event.photoURL ?? '';

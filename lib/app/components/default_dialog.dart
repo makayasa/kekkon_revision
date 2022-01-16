@@ -5,8 +5,8 @@ import 'constant.dart';
 import 'default_text.dart';
 import 'primary_button.dart';
 
-class ErrorDialog extends StatelessWidget {
-  ErrorDialog({
+class DefDialog extends StatelessWidget {
+  DefDialog({
     required this.onConfirm,
     required this.errorMessage,
     this.confirmText = 'OK',
