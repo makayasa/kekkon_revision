@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:kekkon_revision/app/components/constant.dart';
+import 'package:kekkon_revision/app/components/def_drawer.dart';
 import 'package:kekkon_revision/app/components/default_appbar.dart';
 import 'package:kekkon_revision/app/components/default_text.dart';
 
@@ -18,7 +19,7 @@ class HomeView extends GetView<HomeController> {
           controller.scaffoldKey.currentState!.openDrawer();
         },
       ),
-      drawer: Drawer(),
+      drawer: DefDrawer(),
       key: controller.scaffoldKey,
       body: Container(
         padding: kDefaultPadding,

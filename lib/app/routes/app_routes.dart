@@ -16,6 +16,7 @@ abstract class Routes {
   static const LIST_ITEMS = _Paths.LIST_ITEMS;
   static const LOGIN = _Paths.LOGIN;
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -31,4 +32,5 @@ abstract class _Paths {
   static const LIST_ITEMS = '/list-items';
   static const LOGIN = '/login';
   static const SPLASH_SCREEN = '/splash-screen';
+  static const PROFILE = '/profile';
 }

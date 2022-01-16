@@ -11,6 +11,7 @@ class LoginController extends GetxController {
   var title = 'KEKKON'.obs;
 
   final GlobalKey<FormBuilderState> formKeyLogin = GlobalKey<FormBuilderState>();
+  var isMasked = true.obs;
 
   var authC = Get.find<AuthController>();
 

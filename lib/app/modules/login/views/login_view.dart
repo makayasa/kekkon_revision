@@ -12,16 +12,6 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: DefText('logOut').normal,
-        onPressed: () {
-          // logKey('token', controller.authC.idToken.value);
-          // logKey('uid', controller.authC.uid.value);
-          // logKey('email', controller.authC.email.value);
-          // logKey('photoUrl', controller.authC.photoUrl.value);
-          controller.authC.auth.signOut();
-        },
-      ),
       resizeToAvoidBottomInset: false,
       body: Align(
         child: ListView(
@@ -47,7 +37,6 @@ class LoginView extends GetView<LoginController> {
                 ],
               ),
             ),
-            Spacer(),
             Container(
               padding: kDefaultPadding,
               child: FormBuilder(
@@ -65,17 +54,29 @@ class LoginView extends GetView<LoginController> {
                       isRequired: true,
                     ),
                     SizedBox(height: 15),
-                    InputBuilderText(
-                      name: 'password',
-                      label: 'password',
-                      maskText: true,
-                      border: OutlineInputBorder(
-                        borderRadius: kDefaultBorderRadius,
+                    Obx(
+                      () => InputBuilderText(
+                        name: 'password',
+                        label: 'password',
+                        maskText: controller.isMasked.value,
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            controller.isMasked.value = !controller.isMasked.value;
+                          },
+                          icon: Icon(
+                            controller.isMasked.value == true ? Icons.visibility : Icons.visibility_off,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: kDefaultBorderRadius,
+                        ),
+                        isRequired: true,
                       ),
-                      isRequired: true,
                     ),
                     SizedBox(height: 15),
                     PrimaryButton(
+                      formBlock: false,
+                      padding: EdgeInsets.symmetric(horizontal: 75, vertical: 15),
                       text: 'Login',
                       press: () {
                         controller.login();

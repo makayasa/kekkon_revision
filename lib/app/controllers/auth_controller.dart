@@ -12,26 +12,34 @@ class AuthController extends GetxController {
   var idToken = ''.obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
-    streamAuth();
   }
 
-  void streamAuth() async {
-    auth.authStateChanges().listen((event) async {
-      if (event != null) {
-        uid.value = event.uid;
-        email.value = event.email ?? '';
-        photoUrl.value = event.photoURL ?? '';
-        idToken.value = await event.getIdToken();
-
-        logKey('streamAuth', event);
-      } else {
-        logKey('streamAuth else', event);
-        Get.defaultDialog(title: 'tes logOut');
-        Get.toNamed(Routes.SPLASH_SCREEN);
-      }
-    });
+  Future<void> streamAuth() async {
+    auth.authStateChanges().listen(
+      (event) async {
+        dialogLoading();
+        if (event != null) {
+          uid.value = event.uid;
+          email.value = event.email ?? '';
+          photoUrl.value = event.photoURL ?? '';
+          idToken.value = await event.getIdToken();
+          logKey('streamAuth', event);
+          Get.offAllNamed(Routes.HOME);
+        } else {
+          logKey('streamAuth else', event);
+          uid.value = '';
+          email.value = '';
+          photoUrl.value = '';
+          idToken.value = '';
+          // Get.defaultDialog(title: 'tes logOut');
+          // Get.toNamed(Routes.SPLASH_SCREEN);
+          Get.offAllNamed(Routes.LOGIN);
+        }
+        Get.back();
+      },
+    );
   }
 
   Stream<User?> get stremAuth => auth.authStateChanges();
