@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kekkon_revision/app/components/constant.dart';
 import 'package:kekkon_revision/app/components/default_text.dart';
-import 'package:kekkon_revision/app/components/function_utils.dart';
-import 'package:kekkon_revision/app/controllers/auth_controller.dart';
+import 'package:kekkon_revision/app/routes/app_pages.dart';
 
 class DefAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
@@ -30,10 +29,7 @@ class DefAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () async {
             // Get.toNamed(Routes.CART);
             // logKey(authFirebase());
-            var authC = Get.find<AuthController>();
-            logKey('asdasd');
-
-            authC.update();
+            Get.toNamed(Routes.CART);
 
             // logKey(a);
           },

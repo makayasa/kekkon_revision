@@ -1,12 +1,17 @@
 import 'package:get/get.dart';
+import 'package:kekkon_revision/app/components/function_utils.dart';
 
 class CartController extends GetxController {
-  //TODO: Implement CartController
+  var title = 'Keranjang'.obs;
+  var data = {}.obs;
+  var listCart = [].obs;
 
-  final count = 0.obs;
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    var temp = await fetchData(collection: 'cart');
+    listCart.assignAll(temp!);
+    logKey('tes', listCart[0].data() as Map<String, dynamic>);
   }
 
   @override
@@ -16,5 +21,4 @@ class CartController extends GetxController {
 
   @override
   void onClose() {}
-  void increment() => count.value++;
 }
