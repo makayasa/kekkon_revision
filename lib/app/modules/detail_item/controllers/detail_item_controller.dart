@@ -18,9 +18,13 @@ class DetailItemController extends GetxController {
   Future<void> addToCart() async {
     try {
       CollectionReference cart = firestore.collection('cart');
+      // var ad = {...data, 'tes': 'sd'};
+      data.assignAll({...data, 'tipe': title.value});
       cart.doc(authC.uid.value).set(
         {
-          title.value: data,
+          'cart': FieldValue.arrayUnion(
+            [data],
+          ),
         },
         SetOptions(merge: true),
       );

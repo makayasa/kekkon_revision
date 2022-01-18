@@ -16,6 +16,7 @@ void main() async {
     GetMaterialApp(
       title: "Application",
       initialRoute: AppPages.INITIAL,
+      // initialRoute: Routes.HOME,
       getPages: AppPages.routes,
       localizationsDelegates: [
         FormBuilderLocalizations.delegate,
