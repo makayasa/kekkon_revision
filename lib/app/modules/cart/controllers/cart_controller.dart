@@ -2,8 +2,10 @@ import 'dart:ffi';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:kekkon_revision/app/components/default_dialog.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/controllers/auth_controller.dart';
+import 'package:kekkon_revision/app/routes/app_pages.dart';
 
 class CartController extends GetxController {
   var title = 'Keranjang'.obs;
@@ -14,6 +16,10 @@ class CartController extends GetxController {
   var authC = Get.find<AuthController>();
 
   var totalPrice = 0.obs;
+
+  var date = DateTime.now().obs;
+
+  var isdatePicked = false.obs;
 
   void sumPrice() {
     int tempPrice = 0;
@@ -54,6 +60,57 @@ class CartController extends GetxController {
     } catch (e) {
       Get.back();
       logKey('error delete', e);
+    }
+  }
+
+  void checkOut() async {
+    dialogLoading();
+    if (listCart.isEmpty) {
+      Get.back();
+      Get.dialog(
+        DefDialog(
+            onConfirm: () {
+              Get.back();
+            },
+            errorMessage: 'Cart anda masih kosong'),
+      );
+    } else if (date.value.day == DateTime.now().day) {
+      Get.back();
+      Get.dialog(
+        DefDialog(
+            onConfirm: () {
+              Get.back();
+            },
+            errorMessage: 'Harap Pilih Tanggal Pemesanan'),
+      );
+    } else {
+      try {
+        CollectionReference reservation = firestore.collection('reservation');
+        CollectionReference cart = firestore.collection('cart');
+
+        await cart.doc(authC.uid.value).delete();
+
+        await reservation.doc(authC.uid.value).set(
+          {
+            'reservation': FieldValue.arrayUnion(listCart),
+            'date': date.value,
+          },
+        );
+        listCart.clear();
+        Get.back();
+        Get.dialog(
+          DefDialog(
+            onConfirm: () {
+              Get.until((route) => Get.currentRoute == Routes.HOME);
+            },
+            errorMessage: 'Check out sukses',
+            title: 'Yayy!',
+          ),
+        );
+      } on FirebaseException catch (exception) {
+        logKey('check out exception', exception);
+        Get.back();
+      }
     }
   }
 

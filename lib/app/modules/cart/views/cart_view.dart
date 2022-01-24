@@ -5,6 +5,7 @@ import 'package:kekkon_revision/app/components/constant.dart';
 import 'package:kekkon_revision/app/components/default_text.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/components/primary_button.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 import '../controllers/cart_controller.dart';
 
@@ -36,7 +37,7 @@ class CartView extends GetView<CartController> {
                   itemBuilder: (context, index) {
                     return Dismissible(
                       key: UniqueKey(),
-                      onDismissed: (dirrection){
+                      onDismissed: (dirrection) {
                         controller.deleteCart(index);
                       },
                       child: Container(
@@ -57,7 +58,8 @@ class CartView extends GetView<CartController> {
                             SizedBox(width: 10),
                             Expanded(
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Flexible(
                                     child: Column(
@@ -105,35 +107,91 @@ class CartView extends GetView<CartController> {
                       DefText('Total Harga').semilarge,
                       SizedBox(height: 5),
                       Obx(
-                        () => DefText('Rp ${currencyFormat(controller.totalPrice.value)}',).normal,
+                        () => DefText(
+                          'Rp ${currencyFormat(controller.totalPrice.value)}',
+                        ).normal,
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  child: Column(
-                    children: [
-                      // PrimaryButton(
-                      //   text: 'Pilih Tanggal',
-                      //   fontSize: 10,
-                      //   formBlock: false,
-                      //   press: () {},
-                      // ),
-                      TextButton(
-                        onPressed: () {},
-                        child: DefText('Pilih Tanggal').normal,
+                GetX<CartController>(
+                  init: CartController(),
+                  builder: (ctrl) {
+                    return Container(
+                      child: Column(
+                        children: [
+                          Visibility(
+                            visible: ctrl.isdatePicked.isTrue,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: DefText(
+                                dateFormater(controller.date.value,
+                                    dateFormat: 'EEEE, dd MMMM'),
+                              ).normal,
+                            ),
+                          ),
+                          Visibility(
+                            visible: ctrl.isdatePicked.isFalse,
+                            child: TextButton(
+                              onPressed: () {
+                                Get.dialog(
+                                  Dialog(
+                                    child: Wrap(
+                                      children: [
+                                        SfDateRangePicker(
+                                          showActionButtons: true,
+                                          // minDate: DateTime.now(),
+                                          minDate: DateTime(
+                                            DateTime.now().year,
+                                            DateTime.now().month + 3,
+                                            DateTime.now().day,
+                                          ),
+                                          confirmText: 'Ok',
+                                          onSelectionChanged:
+                                              (DateRangePickerSelectionChangedArgs
+                                                  args) {
+                                            logKey('date', args.value);
+                                          },
+                                          onSubmit: (dynamic datePicked) {
+                                            ctrl.date.value = datePicked;
+                                            ctrl.isdatePicked.value = true;
+                                            Get.back();
+                                          },
+                                          onCancel: () {
+                                            Get.back();
+                                          },
+                                          cancelText: 'cancel',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: DefText('Pilih Tanggal').normal,
+                            ),
+                          ),
+
+                          // SizedBox(height: 5),
+                          GestureDetector(
+                            onTap: () {
+                              logKey('check out');
+                              controller.checkOut();
+                            },
+                            child: Container(
+                              padding: kDefaultPaddingB,
+                              decoration: BoxDecoration(
+                                color: kPrimaryColor,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: DefText(
+                                'Check Out',
+                              ).normal,
+                            ),
+                          ),
+                        ],
                       ),
-                      // SizedBox(height: 5),
-                      Container(
-                        padding: kDefaultPaddingB,
-                        decoration: BoxDecoration(
-                          color: kPrimaryColor,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: DefText('Check Out').normal,
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
               ],
             ),
