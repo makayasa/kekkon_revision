@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kekkon_revision/app/components/constant.dart';
+import 'package:kekkon_revision/app/components/default_appbar.dart';
 import 'package:kekkon_revision/app/components/default_text.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/components/primary_button.dart';
@@ -13,11 +14,8 @@ class CartView extends GetView<CartController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Obx(
-          () => DefText(controller.title.value).extraLarge,
-        ),
-        centerTitle: true,
+      appBar: DefAppBar(
+        tittle: controller.title.value,
       ),
       body: Column(
         children: [
@@ -123,7 +121,40 @@ class CartView extends GetView<CartController> {
                           Visibility(
                             visible: ctrl.isdatePicked.isTrue,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.dialog(
+                                  Dialog(
+                                    child: Wrap(
+                                      children: [
+                                        SfDateRangePicker(
+                                          showActionButtons: true,
+                                          // minDate: DateTime.now(),
+                                          minDate: DateTime(
+                                            DateTime.now().year,
+                                            DateTime.now().month + 3,
+                                            DateTime.now().day,
+                                          ),
+                                          confirmText: 'Ok',
+                                          onSelectionChanged:
+                                              (DateRangePickerSelectionChangedArgs
+                                                  args) {
+                                            logKey('date', args.value);
+                                          },
+                                          onSubmit: (dynamic datePicked) {
+                                            ctrl.date.value = datePicked;
+                                            ctrl.isdatePicked.value = true;
+                                            Get.back();
+                                          },
+                                          onCancel: () {
+                                            Get.back();
+                                          },
+                                          cancelText: 'cancel',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
                               child: DefText(
                                 dateFormater(controller.date.value,
                                     dateFormat: 'EEEE, dd MMMM'),

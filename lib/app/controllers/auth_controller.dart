@@ -11,6 +11,7 @@ class AuthController extends GetxController {
   var email = ''.obs;
   var photoUrl = ''.obs;
   var idToken = ''.obs;
+  var name = ''.obs;
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
@@ -35,6 +36,7 @@ class AuthController extends GetxController {
           email.value = event.email ?? '';
           photoUrl.value = event.photoURL ?? '';
           idToken.value = await event.getIdToken();
+          name.value = event.displayName ?? '';
           logKey('streamAuth', event);
           Get.offAllNamed(Routes.HOME);
         } else {

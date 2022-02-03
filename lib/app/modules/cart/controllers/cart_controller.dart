@@ -12,14 +12,18 @@ class CartController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   // var data = {}.obs;
   var listCart = [].obs;
+  var dataVenue = {}.obs;
 
   var authC = Get.find<AuthController>();
 
   var totalPrice = 0.obs;
 
   var date = DateTime.now().obs;
+  var bookDate = [].obs;
 
   var isdatePicked = false.obs;
+
+  var uuidVenue = ''.obs;
 
   void sumPrice() {
     int tempPrice = 0;
@@ -30,12 +34,25 @@ class CartController extends GetxController {
     totalPrice.value = tempPrice;
   }
 
+  void getVenueId() {
+    listCart.forEach((element) {
+      if (element['tipe'] == 'Venue & Decoration') {
+        uuidVenue.value = element['id'];
+        dataVenue.assignAll(element);
+        bookDate.assignAll(dataVenue['bookDate']);
+      }
+      logKey('uuidVenue', uuidVenue.value);
+      logKey('dataVenue', dataVenue);
+    });
+  }
+
   Future<void> fetchCart() async {
     try {
       CollectionReference cart = firestore.collection('cart');
       DocumentSnapshot<Object?> cartFetch =
           await cart.doc(authC.uid.value).get();
       var tempFetch = cartFetch.data() as Map;
+      logKey('tempFetch', tempFetch);
       listCart.assignAll(tempFetch['cart']);
       logKey('listCart', listCart);
       // logKey('cartFetch', tempFetch);
@@ -65,6 +82,7 @@ class CartController extends GetxController {
 
   void checkOut() async {
     dialogLoading();
+    getVenueId();
     if (listCart.isEmpty) {
       Get.back();
       Get.dialog(
@@ -84,32 +102,66 @@ class CartController extends GetxController {
             errorMessage: 'Harap Pilih Tanggal Pemesanan'),
       );
     } else {
-      try {
-        CollectionReference reservation = firestore.collection('reservation');
-        CollectionReference cart = firestore.collection('cart');
-
-        await cart.doc(authC.uid.value).delete();
-
-        await reservation.doc(authC.uid.value).set(
-          {
-            'reservation': FieldValue.arrayUnion(listCart),
-            'date': date.value,
+      if (dataVenue.containsKey('bookDate')) {
+        bookDate.forEach(
+          (element) {
+            if (element == date.value.toString()) {
+              Get.back();
+              Get.dialog(
+                DefDialog(
+                  onConfirm: () {},
+                  errorMessage:
+                      'Venue sudah dibooking di tanggal ${dateFormater(date.value, dateFormat: 'dd MMMM yyyy')}',
+                ),
+              );
+            }
           },
         );
-        listCart.clear();
-        Get.back();
-        Get.dialog(
-          DefDialog(
-            onConfirm: () {
-              Get.until((route) => Get.currentRoute == Routes.HOME);
+      } else {
+        try {
+          CollectionReference reservation = firestore.collection('reservation');
+          CollectionReference cart = firestore.collection('cart');
+          CollectionReference venue = firestore.collection('venue');
+
+          await venue.doc(uuidVenue.value).set(
+            {
+              'booked': true,
+              'bookDate': FieldValue.arrayUnion(
+                [
+                  date.value.toString(),
+                ],
+              ),
             },
-            errorMessage: 'Check out sukses',
-            title: 'Yayy!',
-          ),
-        );
-      } on FirebaseException catch (exception) {
-        logKey('check out exception', exception);
-        Get.back();
+            SetOptions(merge: true),
+          );
+
+          // await venue.doc(uuidVenue.value).update({
+          //   'web':'tes@tes.com'
+          // });
+
+          await cart.doc(authC.uid.value).delete();
+
+          await reservation.doc(authC.uid.value).set(
+            {
+              'reservation': FieldValue.arrayUnion(listCart),
+              'date': date.value.toString(),
+            },
+          );
+          listCart.clear();
+          Get.back();
+          Get.dialog(
+            DefDialog(
+              onConfirm: () {
+                Get.until((route) => Get.currentRoute == Routes.HOME);
+              },
+              errorMessage: 'Check out sukses',
+              title: 'Yayy!',
+            ),
+          );
+        } on FirebaseException catch (exception) {
+          logKey('check out exception', exception);
+          Get.back();
+        }
       }
     }
   }
@@ -119,6 +171,7 @@ class CartController extends GetxController {
     super.onInit();
     // var temp = await fetchData(collection: 'cart');
     await fetchCart();
+    getVenueId();
     sumPrice();
     // listCart.assignAll(temp!);
     // logKey('listCart', listCart);

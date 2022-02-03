@@ -51,7 +51,8 @@ class DetailItemView extends GetView<DetailItemController> {
                     children: [
                       DefText('Price').extraLarge,
                       SizedBox(height: 5),
-                      DefText('Rp ${currencyFormat(controller.data['harga'])}').semilarge,
+                      DefText('Rp ${currencyFormat(controller.data['harga'])}')
+                          .semilarge,
                       SizedBox(height: 10),
                       DefText('Location').extraLarge,
                       SizedBox(height: 5),
@@ -77,7 +78,29 @@ class DetailItemView extends GetView<DetailItemController> {
                     physics: NeverScrollableScrollPhysics(),
 
                     children: [
-                      DefText('Why you should choose us ?').extraLarge,
+                      Row(
+                        children: [
+                          DefText('Why you should choose us ?').extraLarge,
+                          Spacer(),
+                          GestureDetector(
+                            onTap: (){
+                              controller.contactVendor();
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: kPrimaryColor,
+                                ),
+                                borderRadius: kDefaultBorderRadius10,
+                              ),
+                              child: Center(
+                                child: DefText('Hubungi').normal,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(height: 10),
                       ListView.separated(
                         itemCount: controller.info.length,
@@ -102,7 +125,11 @@ class DetailItemView extends GetView<DetailItemController> {
                 text: 'Add To Cart',
                 press: () {
                   // logKey('add to cart', controller.data);
-                  controller.addToCart();
+                  if (controller.id.value[0] == 'v') {
+                    controller.checkBooked();
+                  } else {
+                    controller.addToCart();
+                  }
                 },
               ),
             )

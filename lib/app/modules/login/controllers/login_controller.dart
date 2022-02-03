@@ -21,7 +21,7 @@ class LoginController extends GetxController {
         dialogLoading();
 
         UserCredential userCredential = await authC.auth.signInWithEmailAndPassword(
-          email: formKeyLogin.currentState!.fields['email']!.value,
+          email: formKeyLogin.currentState!.fields['email']!.value.trim(),
           password: formKeyLogin.currentState!.fields['password']!.value,
         );
         Get.back();

@@ -14,7 +14,6 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       appBar: DefAppBar(
         tittle: 'Kekkon',
-        isHome: true,
         openDrawer: () {
           controller.scaffoldKey.currentState!.openDrawer();
         },

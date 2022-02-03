@@ -12,11 +12,15 @@ class DefAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.tittle,
     this.isHome = false,
     this.openDrawer,
+    this.showCart = true,
+    this.leading,
   });
 
   final String? tittle;
   final bool isHome;
   final VoidCallback? openDrawer;
+  final bool showCart;
+  final Widget? leading;
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +29,21 @@ class DefAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       backgroundColor: kPrimaryColor,
       actions: [
-        IconButton(
-          onPressed: () async {
-            // Get.toNamed(Routes.CART);
-            // logKey(authFirebase());
-            Get.toNamed(Routes.CART);
-
-            // logKey(a);
-          },
-          splashRadius: kDefaultSPlashRadius,
-          icon: Icon(Icons.shopping_cart),
+        Visibility(
+          visible: showCart == true,
+          child: IconButton(
+            onPressed: () async {
+              // Get.toNamed(Routes.CART);
+              // logKey(authFirebase());
+              Get.toNamed(Routes.CART);
+        
+              // logKey(a);
+            },
+            splashRadius: kDefaultSPlashRadius,
+            icon: Icon(
+              Icons.shopping_cart,
+            ),
+          ),
         ),
       ],
       leading: isHome == true
@@ -45,7 +54,7 @@ class DefAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
               onPressed: openDrawer,
             )
-          : null,
+          : leading,
     );
   }
 }

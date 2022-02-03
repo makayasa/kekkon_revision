@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:kekkon_revision/app/components/default_text.dart';
+import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/routes/app_pages.dart';
 
 import 'constant.dart';
@@ -32,6 +33,7 @@ class GridviewContent extends StatelessWidget {
         },
         itemBuilder: (context, index) {
           var mapData = data[index].data() as Map<String, dynamic>;
+          logKey('dete', mapData);
           return GestureDetector(
             onTap: () {
               Get.toNamed(

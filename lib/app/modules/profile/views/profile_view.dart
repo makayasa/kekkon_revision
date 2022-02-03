@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kekkon_revision/app/components/default_appbar.dart';
 import 'package:kekkon_revision/app/components/default_text.dart';
 import 'package:kekkon_revision/app/components/primary_button.dart';
 
@@ -12,9 +13,9 @@ class ProfileView extends GetView<ProfileController> {
       init: ProfileController(),
       builder: (ctrl) {
         return Scaffold(
-          appBar: AppBar(
-            title: DefText(ctrl.title.value).extraLarge,
-            centerTitle: true,
+          appBar: DefAppBar(
+            tittle: ctrl.title.value,
+            showCart: false,
             leading: Container(),
           ),
           body: Center(
@@ -31,12 +32,14 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                 ),
                 SizedBox(height: 15),
+                DefText(ctrl.authC.name.value).large,
+                SizedBox(height: 15),
                 DefText(
                   ctrl.authC.email.value,
                   textAlign: TextAlign.center,
                 ).large,
-                SizedBox(height: 15),
-                DefText(ctrl.authC.uid.value).large,
+                // SizedBox(height: 15),
+                // DefText(ctrl.authC.uid.value).large,
                 Spacer(),
                 PrimaryButton(
                   formBlock: false,
