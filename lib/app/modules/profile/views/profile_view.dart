@@ -46,6 +46,7 @@ class ProfileView extends GetView<ProfileController> {
                   text: 'Logout',
                   press: () {
                     ctrl.authC.auth.signOut();
+                    ctrl.authC.googleSignIn.signOut();
                   },
                 ),
                 SizedBox(height: 35),

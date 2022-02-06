@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/routes/app_pages.dart';
 
@@ -15,23 +16,39 @@ class AuthController extends GetxController {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+    GoogleSignIn googleSignIn = GoogleSignIn(
+      // scopes: [
+      //   'email',
+      //   'https://www.googleapis.com/auth/contacts.readonly',
+      // ],
+      );
+
   @override
   void onInit() async {
     super.onInit();
   }
+
+Future<void> signInWithGoogle() async {
+    try {
+      var result = await googleSignIn.signIn();
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await result!.authentication;
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      auth.signInWithCredential(credential);
+    } catch (e) {
+      logKey('error google sign in', e);
+    }
+  }
+  
 
   Future<void> streamAuth() async {
     auth.authStateChanges().listen(
       (event) async {
         dialogLoading();
         if (event != null) {
-          // CollectionReference cart = firestore.collection('cart');
-          // cart.add(
-          //   {
-          //     'initial': DateTime.now(),
-          //   },
-          // );
-
           uid.value = event.uid;
           email.value = event.email ?? '';
           photoUrl.value = event.photoURL ?? '';

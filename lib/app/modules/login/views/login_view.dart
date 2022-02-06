@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_signin_button/button_view.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:get/get.dart';
 import 'package:kekkon_revision/app/components/constant.dart';
 import 'package:kekkon_revision/app/components/default_text.dart';
@@ -61,10 +63,13 @@ class LoginView extends GetView<LoginController> {
                         maskText: controller.isMasked.value,
                         suffixIcon: IconButton(
                           onPressed: () {
-                            controller.isMasked.value = !controller.isMasked.value;
+                            controller.isMasked.value =
+                                !controller.isMasked.value;
                           },
                           icon: Icon(
-                            controller.isMasked.value == true ? Icons.visibility : Icons.visibility_off,
+                            controller.isMasked.value == true
+                                ? Icons.visibility
+                                : Icons.visibility_off,
                           ),
                         ),
                         border: OutlineInputBorder(
@@ -76,12 +81,28 @@ class LoginView extends GetView<LoginController> {
                     SizedBox(height: 15),
                     PrimaryButton(
                       formBlock: false,
-                      padding: EdgeInsets.symmetric(horizontal: 75, vertical: 15),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 75, vertical: 15),
                       text: 'Login',
                       press: () {
                         controller.login();
                       },
                     ),
+                    SizedBox(height: 10),
+                    DefText('or').extraLarge,
+                    // SizedBox(height: 5),
+                    SignInButton(
+                      Buttons.Google,
+                      onPressed: () {
+                        controller.authC.signInWithGoogle();
+                      },
+                    ),
+                    // PrimaryButton(
+                    //   text: 'Login with Google',
+                    //   press: () {
+                    //     controller.authC.signInWithGoogle();
+                    //   },
+                    // ),
                     SizedBox(height: 20),
                     DefText('For Your Special Day').large,
                   ],

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kekkon_revision/app/components/default_dialog.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/controllers/auth_controller.dart';
@@ -10,7 +11,8 @@ import 'package:kekkon_revision/app/routes/app_pages.dart';
 class LoginController extends GetxController {
   var title = 'KEKKON'.obs;
 
-  final GlobalKey<FormBuilderState> formKeyLogin = GlobalKey<FormBuilderState>();
+  final GlobalKey<FormBuilderState> formKeyLogin =
+      GlobalKey<FormBuilderState>();
   var isMasked = true.obs;
 
   var authC = Get.find<AuthController>();
@@ -20,7 +22,8 @@ class LoginController extends GetxController {
       try {
         dialogLoading();
 
-        UserCredential userCredential = await authC.auth.signInWithEmailAndPassword(
+        UserCredential userCredential =
+            await authC.auth.signInWithEmailAndPassword(
           email: formKeyLogin.currentState!.fields['email']!.value.trim(),
           password: formKeyLogin.currentState!.fields['password']!.value,
         );
