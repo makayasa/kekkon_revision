@@ -9,6 +9,37 @@ import 'package:intl/intl.dart';
 import 'package:kekkon_revision/app/components/constant.dart';
 import 'package:kekkon_revision/app/controllers/auth_controller.dart';
 
+
+String replacePhone(String phone) {
+  return '62${bindPhone(phone)}';
+}
+
+String bindPhone(String phone) {
+  String resultPhone = phone;
+  if (phone.startsWith('0')) {
+    resultPhone = phone.substring(1);
+  } else if (phone.startsWith('62')) {
+    resultPhone = phone.substring(2);
+  } else if (phone.startsWith('+62')) {
+    resultPhone = phone.substring(3);
+  }
+
+  return resultPhone;
+}
+
+String reformatPhone(String phone) {
+  String resultPhone = phone;
+
+  resultPhone = resultPhone.replaceAll('-', '');
+  resultPhone = resultPhone.replaceAll(' ', '');
+  resultPhone = resultPhone.replaceAll('.', '');
+  if (phone.startsWith('0') ||
+      phone.startsWith('62') ||
+      phone.startsWith('+62')) resultPhone = '+62' + bindPhone(resultPhone);
+
+  return resultPhone;
+}
+
 void logKey([key, content]) {
   String finalLog = '';
   dynamic tempContent = content ?? key;

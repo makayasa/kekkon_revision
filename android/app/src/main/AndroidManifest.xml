@@ -1,7 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.makayasa.kekkon_revision">
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>   <application
+    <uses-permission android:name="android.permission.INTERNET"/>  
+    <queries>
+       <intent>
+        <action android:name="android.intent.action.SEND" />
+        <data android:mimeType="*/*" />
+      </intent>
+    </queries>
+     <application
         android:label="kekkon_revision"
         android:icon="@mipmap/ic_launcher">
         <activity

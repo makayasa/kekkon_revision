@@ -5,6 +5,7 @@ import 'package:kekkon_revision/app/components/default_dialog.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/controllers/auth_controller.dart';
 import 'package:kekkon_revision/app/modules/cart/controllers/cart_controller.dart';
+import 'package:kekkon_revision/app/modules/detail_item/components/contant.dart';
 import 'package:kekkon_revision/app/routes/app_pages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -21,11 +22,15 @@ class DetailItemController extends GetxController {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  void contactVendor() async{
-    String asd = '0 89603853935';
-    logKey('qwe', asd.replaceAll(' ', ''));
-     await FlutterPhoneDirectCaller.callNumber(asd.replaceAll(' ', ''));
+  void contactVendor() async {
+    // String asd = '0 89603853935';
+    // logKey('qwe', asd.replaceAll(' ', ''));
+    //  await FlutterPhoneDirectCaller.callNumber(asd.replaceAll(' ', ''));
     // launch('https://wa.me/${asd.replaceAll(' ', '')}');
+    Get.bottomSheet(
+      Contant(),
+      ignoreSafeArea: false,
+    );
   }
 
   void checkBooked() {
@@ -57,7 +62,8 @@ class DetailItemController extends GetxController {
             onCancel: () {
               Get.back();
             },
-            errorMessage: 'Venue ini sudah di booked, anda tetap bisa menambahkan ke Keranjang',
+            errorMessage:
+                'Venue ini sudah di booked, anda tetap bisa menambahkan ke Keranjang',
             confirmText: 'Masukkan Keranjang',
             cancelText: 'Kembali',
             title: 'Perhatian',
@@ -144,7 +150,7 @@ class DetailItemController extends GetxController {
       id.value = data['id'];
       if (data.containsKey('bookDate')) {
         bookDate.assignAll(data['bookDate']);
-        logKey('bookDate',bookDate.value);
+        logKey('bookDate', bookDate.value);
       }
       logKey(data.containsKey('gambar'));
     }
