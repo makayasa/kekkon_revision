@@ -33,9 +33,9 @@ class DetailItemController extends GetxController {
     );
   }
 
-  void checkBooked() {
-    if (data.containsKey('booked') && data['booked'] == true) {
-      if (bookDate.isNotEmpty) {
+  void checkBooked() async {
+    if (data.containsKey('booked')) {
+      if (bookDate.isNotEmpty && data['booked'] == true) {
         Get.dialog(
           DefDialog(
             onConfirm: () async {
@@ -70,6 +70,8 @@ class DetailItemController extends GetxController {
           ),
         );
       }
+    } else {
+      await addToCart();
     }
   }
 
@@ -79,7 +81,6 @@ class DetailItemController extends GetxController {
     var cartC = Get.find<CartController>(tag: 'check');
     await cartC.fetchCart();
     bool? haveVenue;
-
     cartC.listCart.forEach((element) {
       if (element['tipe'] == 'Venue & Decoration') {
         haveVenue = true;

@@ -41,8 +41,6 @@ class CartController extends GetxController {
         dataVenue.assignAll(element);
         bookDate.assignAll(dataVenue['bookDate']);
       }
-      logKey('uuidVenue', uuidVenue.value);
-      logKey('dataVenue', dataVenue);
     });
   }
 
@@ -103,10 +101,10 @@ class CartController extends GetxController {
       );
     } else {
       if (dataVenue.containsKey('bookDate')) {
+        logKey('masuk sini ga');
         bookDate.forEach(
           (element) {
             if (element == date.value.toString()) {
-              Get.back();
               Get.dialog(
                 DefDialog(
                   onConfirm: () {},
@@ -134,10 +132,6 @@ class CartController extends GetxController {
             },
             SetOptions(merge: true),
           );
-
-          // await venue.doc(uuidVenue.value).update({
-          //   'web':'tes@tes.com'
-          // });
 
           await cart.doc(authC.uid.value).delete();
 

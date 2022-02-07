@@ -205,7 +205,6 @@ class CartView extends GetView<CartController> {
                           // SizedBox(height: 5),
                           GestureDetector(
                             onTap: () {
-                              logKey('check out');
                               controller.checkOut();
                             },
                             child: Container(
