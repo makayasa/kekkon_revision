@@ -7,8 +7,8 @@ import 'package:kekkon_revision/app/modules/detail_item/controllers/detail_item_
 import 'package:url_launcher/url_launcher.dart';
 import '../../../components/function_utils.dart';
 
-class Contant extends GetView<DetailItemController> {
-  const Contant({Key? key}) : super(key: key);
+class Content extends GetView<DetailItemController> {
+  const Content({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

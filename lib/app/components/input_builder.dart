@@ -134,9 +134,6 @@ class InputBuilderText extends StatelessWidget {
         if (isRequired) FormBuilderValidators.required(context),
         if (isEmail) FormBuilderValidators.email(context),
         if (isPhone || isNumber) FormBuilderValidators.numeric(context),
-        // if (isVerifPass)
-        //   FormBuilderValidators.equal(context, value != null ? value! : '',
-        //       errorText: 'Value must be equal to password'),
         if (strEqual != null) FormBuilderValidators.equal(context, strEqual!, errorText: 'Value must be equal to password'),
       ]),
       textInputAction: textInputAction,

@@ -38,8 +38,6 @@ class ProfileView extends GetView<ProfileController> {
                   ctrl.authC.email.value,
                   textAlign: TextAlign.center,
                 ).large,
-                // SizedBox(height: 15),
-                // DefText(ctrl.authC.uid.value).large,
                 Spacer(),
                 PrimaryButton(
                   formBlock: false,

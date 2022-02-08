@@ -26,27 +26,3 @@ void main() async {
     ),
   );
 }
-
-// class MyApp extends StatelessWidget {
-//   final authC = Get.find<AuthController>();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamBuilder<User?>(
-//       stream: authC.stremAuth,
-//       builder: (context, snapshot) {
-//         if (snapshot.connectionState == ConnectionState.active) {
-//           logKey('ini stream di main', snapshot.data);
-//         }
-//         return GetMaterialApp(
-//           title: "Application",
-//           initialRoute: AppPages.INITIAL,
-//           getPages: AppPages.routes,
-//           localizationsDelegates: [
-//             FormBuilderLocalizations.delegate,
-//           ],
-//         );
-//       },
-//     );
-//   }
-// }

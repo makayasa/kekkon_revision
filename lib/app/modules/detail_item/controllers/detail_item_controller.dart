@@ -1,13 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:get/get.dart';
 import 'package:kekkon_revision/app/components/default_dialog.dart';
 import 'package:kekkon_revision/app/components/function_utils.dart';
 import 'package:kekkon_revision/app/controllers/auth_controller.dart';
 import 'package:kekkon_revision/app/modules/cart/controllers/cart_controller.dart';
-import 'package:kekkon_revision/app/modules/detail_item/components/contant.dart';
+import 'package:kekkon_revision/app/modules/detail_item/components/content.dart';
 import 'package:kekkon_revision/app/routes/app_pages.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DetailItemController extends GetxController {
   var title = ''.obs;
@@ -15,7 +13,6 @@ class DetailItemController extends GetxController {
   var images = [].obs;
   var info = [].obs;
   var id = ''.obs;
-  // var bookDate = ''.obs;
   var bookDate = [].obs;
 
   var authC = Get.find<AuthController>();
@@ -23,12 +20,8 @@ class DetailItemController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   void contactVendor() async {
-    // String asd = '0 89603853935';
-    // logKey('qwe', asd.replaceAll(' ', ''));
-    //  await FlutterPhoneDirectCaller.callNumber(asd.replaceAll(' ', ''));
-    // launch('https://wa.me/${asd.replaceAll(' ', '')}');
     Get.bottomSheet(
-      Contant(),
+      Content(),
       ignoreSafeArea: false,
     );
   }
@@ -100,7 +93,6 @@ class DetailItemController extends GetxController {
     } else {
       try {
         CollectionReference cart = firestore.collection('cart');
-        // var ad = {...data, 'tes': 'sd'};
         data.assignAll({...data, 'tipe': title.value});
         cart.doc(authC.uid.value).set(
           {
@@ -121,7 +113,6 @@ class DetailItemController extends GetxController {
               Get.toNamed(Routes.CART);
             },
             onCancel: () {
-              // Get.until((route) => Get.currentRoute == Routes.HOME);
               Get.back();
             },
           ),

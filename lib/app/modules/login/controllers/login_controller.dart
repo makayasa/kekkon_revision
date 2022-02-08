@@ -10,11 +10,9 @@ import 'package:kekkon_revision/app/routes/app_pages.dart';
 
 class LoginController extends GetxController {
   var title = 'KEKKON'.obs;
-
   final GlobalKey<FormBuilderState> formKeyLogin =
       GlobalKey<FormBuilderState>();
   var isMasked = true.obs;
-
   var authC = Get.find<AuthController>();
 
   void login() async {
@@ -45,17 +43,9 @@ class LoginController extends GetxController {
       }
     }
   }
-
-  // void tesStream() async {
-  //   authC.auth.authStateChanges().listen((event) {
-  //     logKey('tesStrean', event!);
-  //   });
-  // }
-
   @override
   void onInit() {
     super.onInit();
-    // tesStream();
   }
 
   @override

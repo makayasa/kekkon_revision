@@ -10,19 +10,13 @@ import 'package:kekkon_revision/app/routes/app_pages.dart';
 class CartController extends GetxController {
   var title = 'Keranjang'.obs;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  // var data = {}.obs;
   var listCart = [].obs;
   var dataVenue = {}.obs;
-
   var authC = Get.find<AuthController>();
-
   var totalPrice = 0.obs;
-
   var date = DateTime.now().obs;
   var bookDate = [].obs;
-
   var isdatePicked = false.obs;
-
   var uuidVenue = ''.obs;
 
   void sumPrice() {
@@ -53,7 +47,6 @@ class CartController extends GetxController {
       logKey('tempFetch', tempFetch);
       listCart.assignAll(tempFetch['cart']);
       logKey('listCart', listCart);
-      // logKey('cartFetch', tempFetch);
     } catch (e) {
       logKey('error', e);
     }
@@ -163,13 +156,9 @@ class CartController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    // var temp = await fetchData(collection: 'cart');
     await fetchCart();
     getVenueId();
     sumPrice();
-    // listCart.assignAll(temp!);
-    // logKey('listCart', listCart);
-    // logKey('tes', listCart[0].data() as Map<String, dynamic>);
   }
 
   @override

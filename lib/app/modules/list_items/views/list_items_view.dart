@@ -23,7 +23,6 @@ class ListItemsView extends GetView<ListItemsController> {
             return Container(
               child: ctrl.listItems.isEmpty
                   ? Center(
-                      // child: CircularProgressIndicator(),
                       child: loading(),
                     )
                   : GridviewContent(

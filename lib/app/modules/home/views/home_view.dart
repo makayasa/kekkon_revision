@@ -53,7 +53,6 @@ class HomeView extends GetView<HomeController> {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        // logKey('home content', controller.homeContent[index]['text']);
                         controller.routesContent(index: index);
                       },
                       splashColor: kPrimaryColor.withOpacity(0.45),

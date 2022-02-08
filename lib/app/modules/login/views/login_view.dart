@@ -17,8 +17,6 @@ class LoginView extends GetView<LoginController> {
       resizeToAvoidBottomInset: false,
       body: Align(
         child: ListView(
-          // mainAxisSize: MainAxisSize.min,
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           physics: BouncingScrollPhysics(),
           children: [
             SizedBox(height: Get.height * 0.25),
@@ -97,12 +95,6 @@ class LoginView extends GetView<LoginController> {
                         controller.authC.signInWithGoogle();
                       },
                     ),
-                    // PrimaryButton(
-                    //   text: 'Login with Google',
-                    //   press: () {
-                    //     controller.authC.signInWithGoogle();
-                    //   },
-                    // ),
                     SizedBox(height: 20),
                     DefText('For Your Special Day').large,
                   ],

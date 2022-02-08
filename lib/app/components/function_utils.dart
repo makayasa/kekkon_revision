@@ -23,7 +23,6 @@ String bindPhone(String phone) {
   } else if (phone.startsWith('+62')) {
     resultPhone = phone.substring(3);
   }
-
   return resultPhone;
 }
 
@@ -50,7 +49,6 @@ void logKey([key, content]) {
   } else {
     finalLog = tempContent.toString();
   }
-
   if (content != null) {
     log('$key => $finalLog');
   } else {
@@ -64,26 +62,15 @@ Future<List?> fetchData({required String collection}) async {
     CollectionReference collectionReference = firestore.collection(collection);
     QuerySnapshot<Object?> dataFetch = await collectionReference.get();
     return dataFetch.docs;
-    // listData.assignAll(dataGaun.docs);
-    // isFetching.value = !isFetching.value;
   } catch (e) {
     logKey('fetchData exeption', e);
     return [];
-    // isFetching.value = !isFetching.value;
   }
 }
 
 authFirebase() async {
-  // FirebaseAuth auth = FirebaseAuth.instance;
   var authC = Get.find<AuthController>();
-
   logKey(authC.reactive);
-
-  // Stream<User?> get stremAuth => auth.authStateChanges();
-
-  // var a = auth.authStateChanges();
-  // logKey(a);
-  // return a;
 }
 
 DateTime dateAddDay(dynamic startDate, int addDate) {

@@ -201,8 +201,6 @@ class CartView extends GetView<CartController> {
                               child: DefText('Pilih Tanggal').normal,
                             ),
                           ),
-
-                          // SizedBox(height: 5),
                           GestureDetector(
                             onTap: () {
                               controller.checkOut();

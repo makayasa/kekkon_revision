@@ -16,19 +16,14 @@ class AuthController extends GetxController {
 
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    GoogleSignIn googleSignIn = GoogleSignIn(
-      // scopes: [
-      //   'email',
-      //   'https://www.googleapis.com/auth/contacts.readonly',
-      // ],
-      );
+  GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
   void onInit() async {
     super.onInit();
   }
 
-Future<void> signInWithGoogle() async {
+  Future<void> signInWithGoogle() async {
     try {
       var result = await googleSignIn.signIn();
       GoogleSignInAuthentication googleSignInAuthentication =
@@ -42,7 +37,6 @@ Future<void> signInWithGoogle() async {
       logKey('error google sign in', e);
     }
   }
-  
 
   Future<void> streamAuth() async {
     auth.authStateChanges().listen(
@@ -62,14 +56,11 @@ Future<void> signInWithGoogle() async {
           email.value = '';
           photoUrl.value = '';
           idToken.value = '';
-          // Get.defaultDialog(title: 'tes logOut');
-          // Get.toNamed(Routes.SPLASH_SCREEN);
           Get.offAllNamed(Routes.LOGIN);
         }
         Get.back();
       },
     );
   }
-
   Stream<User?> get stremAuth => auth.authStateChanges();
 }

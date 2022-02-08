@@ -33,11 +33,7 @@ class DefAppBar extends StatelessWidget implements PreferredSizeWidget {
           visible: showCart == true,
           child: IconButton(
             onPressed: () async {
-              // Get.toNamed(Routes.CART);
-              // logKey(authFirebase());
               Get.toNamed(Routes.CART);
-        
-              // logKey(a);
             },
             splashRadius: kDefaultSPlashRadius,
             icon: Icon(

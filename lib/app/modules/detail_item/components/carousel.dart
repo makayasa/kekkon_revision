@@ -13,9 +13,6 @@ class Carousel extends GetView<DetailItemController> {
         controller: PageController(viewportFraction: 0.8),
         itemCount: controller.images.length,
         itemBuilder: (context, index) {
-          // var a = index + 1;
-          // String keyImage = 'gambar_$a';
-
           return Container(
             margin: index == 0
                 ? EdgeInsets.only(right: 10)

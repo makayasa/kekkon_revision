@@ -22,7 +22,6 @@ class DetailItemView extends GetView<DetailItemController> {
           alignment: Alignment.bottomCenter,
           children: [
             ListView(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               physics: BouncingScrollPhysics(),
               children: [
                 HeaderImage(),
@@ -47,7 +46,6 @@ class DetailItemView extends GetView<DetailItemController> {
                   child: ListView(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       DefText('Price').extraLarge,
                       SizedBox(height: 5),
@@ -64,19 +62,15 @@ class DetailItemView extends GetView<DetailItemController> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  // height: 200,
                   margin: kDefaultPadding,
                   padding: kDefaultPaddingB,
-                  // decoration: kDefaultBoxDecoration,
                   decoration: BoxDecoration(
                     color: kPrimaryColor.withOpacity(0.2),
                     borderRadius: kDefaultBorderRadius,
                   ),
                   child: ListView(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-
                     children: [
                       Row(
                         children: [
@@ -124,7 +118,6 @@ class DetailItemView extends GetView<DetailItemController> {
               child: PrimaryButton(
                 text: 'Add To Cart',
                 press: () {
-                  // logKey('add to cart', controller.data);
                   if (controller.id.value[0] == 'v') {
                     controller.checkBooked();
                   } else {

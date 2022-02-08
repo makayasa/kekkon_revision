@@ -11,7 +11,6 @@ class HeaderImage extends GetView<DetailItemController> {
   Widget build(BuildContext context) {
     return Container(
       height: Get.height * 0.35,
-      // width: double.infinity,
       child: Stack(
         alignment: Alignment.bottomLeft,
         fit: StackFit.expand,
@@ -42,11 +41,6 @@ class HeaderImage extends GetView<DetailItemController> {
                     backgroundImage: NetworkImage(
                       controller.data['gambar'],
                     ),
-                    // child: FadeInImage.memoryNetwork(
-                    //   placeholder: kTransparentImage,
-                    //   image: controller.data['gambar'],
-                    // ),
-                    // backgroundColor: Colors.transparent,
                   ),
                   SizedBox(height: 10),
                   DefText(
@@ -57,31 +51,6 @@ class HeaderImage extends GetView<DetailItemController> {
               ),
             ),
           ),
-          // Positioned(
-          //   top: 70,
-          //   // right: 0,
-          //   left: 135,
-          //   // bottom: Get.height * 0.4 / 2,
-          //   child: Container(
-          //     child: Column(
-          //       children: [
-          //         CircleAvatar(
-          //           radius: 45,
-          //           backgroundImage: NetworkImage(
-          //             controller.data['gambar'],
-          //           ),
-          //           // child: FadeInImage.memoryNetwork(
-          //           //   placeholder: kTransparentImage,
-          //           //   image: controller.data['gambar'],
-          //           // ),
-          //           // backgroundColor: Colors.transparent,
-          //         ),
-          //         SizedBox(height: 5),
-          //         DefText(controller.data['nama']).large,
-          //       ],
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
